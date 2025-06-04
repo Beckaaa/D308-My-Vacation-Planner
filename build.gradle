@@ -2,3 +2,8 @@
 plugins {
 alias(libs.plugins.android.application) apply false
 }
+
+//room framework version
+ext{
+    roomVersion='2.6.1'
+}
