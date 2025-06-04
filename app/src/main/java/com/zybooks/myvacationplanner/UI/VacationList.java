@@ -1,6 +1,8 @@
 package com.zybooks.myvacationplanner.UI;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zybooks.myvacationplanner.R;
 
 public class VacationList extends AppCompatActivity {
@@ -21,6 +24,12 @@ public class VacationList extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        FloatingActionButton fab = findViewById(R.id.floatingActionButtonVacationList);
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(VacationList.this, VacationDetails.class);
+            startActivity(intent);
         });
     }
 }
