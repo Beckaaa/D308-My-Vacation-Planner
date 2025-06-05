@@ -94,7 +94,7 @@ public class VacationDetails extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_vacation_details, menu);
         return true;
     }
-    // TODO: add save/delete vacation options for the vacation details menu
+    // B3.b add save/update vacation options for the vacation details menu
     public boolean onOptionsItemSelected(MenuItem item) {
         // save and update vacations
         if(item.getItemId() == R.id.savevacation) {
@@ -112,7 +112,8 @@ public class VacationDetails extends AppCompatActivity {
                 this.finish();
             }
         }
-//TODO: commit commented separate for validation as b1.b
+// commited separate for validation as b1.b
+        //b3b delete
         if(item.getItemId() == R.id.deletevacation) {
             Vacation vacation;
             vacation = new Vacation(vacationID, editName.getText().toString(), editPlace.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
