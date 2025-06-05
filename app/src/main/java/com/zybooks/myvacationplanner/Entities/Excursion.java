@@ -9,7 +9,6 @@ public class Excursion {
     private int excursionID;
     private String excursionTitle;
     private String excursionDate;
-
     private int vacationID;
 
     //constructor

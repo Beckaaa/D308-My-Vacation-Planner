@@ -59,7 +59,7 @@ public class ExcursionDetails extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_excursion_details, menu);
         return true;
     }
-    //save excursion
+    //save and delete excursions for both B5B and B3H task requirements
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.saveexcursion) {
             Excursion excursion;

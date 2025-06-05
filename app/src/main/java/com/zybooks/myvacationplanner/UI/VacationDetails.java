@@ -81,7 +81,7 @@ public class VacationDetails extends AppCompatActivity {
         recyclerView.setAdapter(excursionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Excursion> filteredExcursions = new ArrayList<>();
-        for (Excursion e : repository.getmAllExcursions()){
+        for (Excursion e : repository.getmAssociatedExcursions(vacationID)){
             if (e.getVacationID() == vacationID) filteredExcursions.add(e);
         }
         excursionAdapter.setExcursions(filteredExcursions);
@@ -117,16 +117,27 @@ public class VacationDetails extends AppCompatActivity {
         if(item.getItemId() == R.id.deletevacation) {
             Vacation vacation;
             vacation = new Vacation(vacationID, editName.getText().toString(), editPlace.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
-            Toast.makeText(VacationDetails.this,"Successfully deleted", Toast.LENGTH_LONG).show();
+
             if (repository.getmAssociatedExcursions(vacationID).size() == 0) {
-            repository.delete(vacation);
+                repository.delete(vacation);
+                Toast.makeText(VacationDetails.this,"Successfully deleted", Toast.LENGTH_LONG).show();
              }
             else {
                   Toast.makeText(VacationDetails.this,"Cannot delete this vacation", Toast.LENGTH_LONG).show();
              }
-
+            this.finish();
         }
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Excursion> allExcursions = repository.getmAllExcursions();
+        RecyclerView recyclerView = findViewById(R.id.vacationdetailsrecyclerview);
+        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
+        recyclerView.setAdapter(excursionAdapter);
+        excursionAdapter.setExcursions(allExcursions);
     }
 }
 
