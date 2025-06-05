@@ -4,4 +4,8 @@
     <string name="ready_to_explore">Ready to Explore?</string>
     <string name="vacation_list">Vacation List</string>
     <string name="vacation_title">Vacation Title:</string>
+    <string name="vacation_details">Vacation Details</string>
+    <string name="excursion_details">Excursion Details</string>
+    <string name="name_of_the_excursion">name of the excursion</string>
+    <string name="excursion_name">Excursion Name:</string>
 </resources>

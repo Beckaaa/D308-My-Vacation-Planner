@@ -8,11 +8,12 @@
     tools:context=".UI.VacationList">
 
     <TextView
-        android:id="@+id/textViewVacationList"
+        android:id="@+id/textViewVacationDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autoSizeTextType="uniform"
-        android:text="@string/vacation_list"
+        android:text="@string/vacation_details"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +39,7 @@
         android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewVacationList"
+        app:layout_constraintTop_toBottomOf="@id/textViewVacationDetails"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,11 +56,12 @@
                     android:padding="10dp"
                     android:text="@string/vacation_title"
                     />
+
                 <EditText
                     android:id="@+id/vacationtitletext"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:hint="title of the vacation"/>
+                    android:hint="title of the vacation" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -70,13 +72,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:padding="10dp"
-                    android:text="Place to Stay Name:"
+                    android:text="Where to Stay:"
                     />
+
                 <EditText
                     android:id="@+id/placetostaytext"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:hint="name of the place to stay"/>
+                    android:hint="name of the place to stay" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -89,10 +92,14 @@
                     android:padding="10dp"
                     android:text="Start Date:"
                     />
+                <!--edittext is a placeholder for start date-->
                 <EditText
-                    android:id="@+id/startdatetext"
+                    android:id="@+id/editTextStartDateVacations"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="date"
                     android:hint="MM/DD/YY"/>
 
             </LinearLayout>
@@ -107,16 +114,18 @@
                     android:padding="10dp"
                     android:text="End Date:"
                     />
+                <!--edittext is a placeholder for end date-->
+
                 <EditText
-                    android:id="@+id/enddatetext"
+                    android:id="@+id/editTextEndDateVacations"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="date"
                     android:hint="MM/DD/YY"/>
             </LinearLayout>
-
         </LinearLayout>
-
-
     </ScrollView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vacationlistrecyclerview"
@@ -127,4 +136,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vacationscrollview" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
