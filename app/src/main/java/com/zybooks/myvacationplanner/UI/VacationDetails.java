@@ -74,7 +74,7 @@ public class VacationDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //set recycler view to use excursion repo
+        //B3.g start-- set recycler view to use excursion repo
         RecyclerView recyclerView = findViewById(R.id.vacationdetailsrecyclerview);
         repository = new Repository(getApplication());
         final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
@@ -85,6 +85,7 @@ public class VacationDetails extends AppCompatActivity {
             if (e.getVacationID() == vacationID) filteredExcursions.add(e);
         }
         excursionAdapter.setExcursions(filteredExcursions);
+        //B3.g end
     }
 
     //menu inflater
