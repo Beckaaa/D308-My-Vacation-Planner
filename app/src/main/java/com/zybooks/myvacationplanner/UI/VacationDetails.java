@@ -116,12 +116,12 @@ public class VacationDetails extends AppCompatActivity {
             Vacation vacation;
             vacation = new Vacation(vacationID, editName.getText().toString(), editPlace.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
             Toast.makeText(VacationDetails.this,"Successfully deleted", Toast.LENGTH_LONG).show();
-            //if (repository.getmAssociatedExcursions(vacationID).size() == 0) {
+            if (repository.getmAssociatedExcursions(vacationID).size() == 0) {
             repository.delete(vacation);
-             //}
-            //else {
-             //     Toast.makeText(VacationDetails.this,"Cannot delete this vacation", Toast.LENGTH_LONG).show();
-             //}
+             }
+            else {
+                  Toast.makeText(VacationDetails.this,"Cannot delete this vacation", Toast.LENGTH_LONG).show();
+             }
 
         }
         return true;
