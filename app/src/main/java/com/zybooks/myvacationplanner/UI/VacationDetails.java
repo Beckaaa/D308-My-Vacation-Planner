@@ -112,7 +112,7 @@ public class VacationDetails extends AppCompatActivity {
                 this.finish();
             }
         }
-// commited separate for validation as b1.b
+// committed separate for validation as b1.b
         //b3b delete
         if(item.getItemId() == R.id.deletevacation) {
             Vacation vacation;
@@ -130,15 +130,15 @@ public class VacationDetails extends AppCompatActivity {
         return true;
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        List<Excursion> allExcursions = repository.getmAllExcursions();
-//        RecyclerView recyclerView = findViewById(R.id.vacationdetailsrecyclerview);
-//        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
-//        recyclerView.setAdapter(excursionAdapter);
-//        excursionAdapter.setExcursions(allExcursions);
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Excursion> allExcursions = repository.getmAllExcursions();
+        RecyclerView recyclerView = findViewById(R.id.vacationdetailsrecyclerview);
+        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
+        recyclerView.setAdapter(excursionAdapter);
+       excursionAdapter.setExcursions(allExcursions);
+    }
 }
 
 
