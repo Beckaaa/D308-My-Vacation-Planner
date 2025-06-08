@@ -55,8 +55,8 @@ public class VacationList extends AppCompatActivity {
    protected void onResume() {
         super.onResume();
         List<Vacation> allVacations = repository.getmAllVacations();
-        RecyclerView recyclerView = findViewById(R.id.vacationlistrecyclerview);
         final VacationAdapter vacationAdapter = new VacationAdapter(this);
+        RecyclerView recyclerView = findViewById(R.id.vacationlistrecyclerview);
         recyclerView.setAdapter(vacationAdapter);
         vacationAdapter.setVacations(allVacations);
    }
