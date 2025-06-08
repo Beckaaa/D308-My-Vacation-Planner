@@ -1,10 +1,12 @@
 package com.zybooks.myvacationplanner.UI;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.zybooks.myvacationplanner.Entities.Vacation;
 import com.zybooks.myvacationplanner.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class VacationDetails extends AppCompatActivity {
@@ -63,6 +66,9 @@ public class VacationDetails extends AppCompatActivity {
         editPlace.setText(place);
         editStartDate.setText(startDate);
         editEndDate.setText(endDate);
+
+        editEndDate.setOnClickListener(v -> showDate(editEndDate));
+        editStartDate.setOnClickListener(v -> showDate(editStartDate));
 
 
         // fab functionality
@@ -127,7 +133,26 @@ public class VacationDetails extends AppCompatActivity {
              }
             this.finish();
         }
+        //TODO: add sharing menu list item and send information to the application using sendIntent.putExtra(Intent.EXTRA_TEXT, "value");
         return true;
+    }
+
+    //added calendar and format validation
+    private void showDate(EditText targetedEditText) {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay)-> {
+            String formattedDate = String.format("%02d/%02d/%02d", selectedMonth +1, selectedDay, selectedYear % 100);
+            targetedEditText.setText(formattedDate);
+            //formattedDate validation
+            if (!formattedDate.matches(("\\d{2}/\\d{2}/\\d{2}/"))){
+                targetedEditText.setError("Invalid date format");
+            }
+
+                }, year, month, day);
+        datePickerDialog.show();
     }
 
     @Override

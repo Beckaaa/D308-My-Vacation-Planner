@@ -80,7 +80,9 @@
                     android:padding="10dp"
                     android:text="Start Date:"
                     />
-                <!--edittext is a placeholder for start date-->
+                <!--edittext start date: made clickable for calendar
+                and prevents manual input to guarantee correct format
+                and displays date selected for start date-->
                 <EditText
                     android:id="@+id/editTextStartDateVacations"
                     android:layout_width="wrap_content"
@@ -88,6 +90,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="date"
+                    android:focusable="false"
+                    android:clickable="true"
                     android:hint="MM/DD/YY"/>
 
             </LinearLayout>
@@ -102,7 +106,9 @@
                     android:padding="10dp"
                     android:text="End Date:"
                     />
-                <!--edittext is a placeholder for end date-->
+                <!--edittext end date: made clickable for calendar
+                 and prevents manual input to guarantee correct format
+                 and displays date selected for end date-->
 
                 <EditText
                     android:id="@+id/editTextEndDateVacations"
@@ -111,6 +117,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="date"
+                    android:focusable="false"
+                    android:clickable="true"
                     android:hint="MM/DD/YY"/>
             </LinearLayout>
         </LinearLayout>
