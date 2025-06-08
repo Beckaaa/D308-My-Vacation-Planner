@@ -3,6 +3,8 @@ package com.zybooks.myvacationplanner.Database;
 import android.adservices.ondevicepersonalization.OnDevicePersonalizationManager;
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
+
 import com.zybooks.myvacationplanner.DAO.ExcursionDAO;
 import com.zybooks.myvacationplanner.DAO.VacationDAO;
 import com.zybooks.myvacationplanner.Entities.Excursion;
@@ -13,8 +15,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Repository {
-    //TODO: Create REPO and then vacation list activity layout add button and menu for delete/update for user CRUD and push B.1a
-    //TODO: add validation for delete to prevent vacation deletion if excursion is associated push B.1.b
 
     private ExcursionDAO mExcursionDAO;
     private VacationDAO mVacationDAO;
@@ -31,7 +31,7 @@ public class Repository {
         mVacationDAO = db.vacationDAO();
     }
 
-    //TODO:db query all vacations
+    //db query all vacations
     public List<Vacation>getmAllVacations() {
         databaseExecutor.execute(()-> {
             mAllVacations = mVacationDAO.getAllVacations();
@@ -45,8 +45,8 @@ public class Repository {
         }
         return mAllVacations;
     }
-    //TODO:db query all excursions
-    public List<Excursion>getmAllExcursions() {
+    //db query all excursions
+    public List<Excursion> getmAllExcursions() {
         databaseExecutor.execute(()-> {
             mAllExcursions = mExcursionDAO.getAllExcursions();
         });
