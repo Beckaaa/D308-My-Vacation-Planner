@@ -12,18 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.myvacationplanner.Entities.Excursion;
+import com.zybooks.myvacationplanner.Entities.Vacation;
 import com.zybooks.myvacationplanner.R;
 
 import java.util.List;
-
 public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.ExcursionViewHolder> {
     private final Context context;
     private List<Excursion> mExcursions;
     private final LayoutInflater mInflater;
+    private final String vacationStart;
+    private final String vacationEnd;
 
     class ExcursionViewHolder extends RecyclerView.ViewHolder {
         private final TextView excursionItemView;
         private final TextView excursionItemView2;
+
         private ExcursionViewHolder (View itemView) {
             super(itemView);
             excursionItemView = itemView.findViewById(R.id.textViewExcursionListItem);
@@ -37,6 +40,9 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
                     intent.putExtra("excursionid", current.getExcursionID());
                     intent.putExtra("name", current.getExcursionTitle());
                     intent.putExtra("date", current.getExcursionDate());
+                    intent.putExtra("vacationStart", ((VacationDetails) context).getStartDate());
+                    intent.putExtra("vacationEnd", ((VacationDetails) context).getEndDate());
+                    intent.putExtra("vacationID", current.getVacationID());
                     context.startActivity(intent);
                 }
             });
@@ -69,10 +75,11 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
         mExcursions = excursions;
         notifyDataSetChanged();
     }
-
-    public ExcursionAdapter(Context context){
+    public ExcursionAdapter(Context context, String vacationStart, String vacationEnd){
         mInflater= LayoutInflater.from(context);
         this.context= context;
+        this.vacationStart = vacationStart;
+        this.vacationEnd =vacationEnd;
     }
 
     @Override
@@ -85,3 +92,4 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
         }
     }
 }
+

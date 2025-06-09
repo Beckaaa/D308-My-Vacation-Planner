@@ -44,6 +44,8 @@ public class VacationDetails extends AppCompatActivity {
     EditText editStartDate;
     EditText editEndDate;
     Repository repository;
+    private ExcursionAdapter excursionAdapter;
+    private RecyclerView recyclerView;
 
 
     @Override
@@ -80,22 +82,26 @@ public class VacationDetails extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String start = editStartDate.getText().toString();
+                String end = editEndDate.getText().toString();
+                if (start.isEmpty() || end.isEmpty()) {
+                    Toast.makeText(VacationDetails.this, "Set vacation start and end dates first.", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 Intent intent = new Intent(VacationDetails.this, ExcursionDetails.class);
                 intent.putExtra("vacationID", vacationID);
+                intent.putExtra("vacationStart",start);
+                intent.putExtra("vacationEnd", end);
                 startActivity(intent);
             }
         });
         //B3.g start-- set recycler view to use excursion repo
-        RecyclerView recyclerView = findViewById(R.id.vacationdetailsrecyclerview);
         repository = new Repository(getApplication());
-        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
+        recyclerView = findViewById(R.id.vacationdetailsrecyclerview);
+        excursionAdapter = new ExcursionAdapter(this, startDate, endDate);
         recyclerView.setAdapter(excursionAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Excursion> filteredExcursions = new ArrayList<>();
-        for (Excursion e : repository.getmAssociatedExcursions(vacationID)){
-            if (e.getVacationID() == vacationID) filteredExcursions.add(e);
-        }
-        excursionAdapter.setExcursions(filteredExcursions);
+        loadExcursions();
         //B3.g end
     }
 
@@ -163,6 +169,14 @@ public class VacationDetails extends AppCompatActivity {
         return true;
     }
 
+    private void loadExcursions(){
+        List<Excursion> filteredExcursions = new ArrayList<>();
+        for (Excursion e : repository.getmAssociatedExcursions(vacationID)){
+            if (e.getVacationID() == vacationID) filteredExcursions.add(e);
+        }
+        excursionAdapter.setExcursions(filteredExcursions);
+    }
+
     //added calendar and format validation
     private void showDate(EditText targetedEditText) {
         final Calendar calendar = Calendar.getInstance();
@@ -181,6 +195,14 @@ public class VacationDetails extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
     //TODO: B3D add end date is after start date validation
 
 
@@ -190,11 +212,7 @@ public class VacationDetails extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        List<Excursion> associatedExcursions = repository.getmAssociatedExcursions(vacationID);
-        RecyclerView recyclerView = findViewById(R.id.vacationdetailsrecyclerview);
-        final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
-        recyclerView.setAdapter(excursionAdapter);
-       excursionAdapter.setExcursions(associatedExcursions);
+        loadExcursions();
     }
 }
 

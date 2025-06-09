@@ -2,6 +2,7 @@ package com.zybooks.myvacationplanner.UI;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -19,9 +20,14 @@ import com.zybooks.myvacationplanner.Database.Repository;
 import com.zybooks.myvacationplanner.Entities.Excursion;
 import com.zybooks.myvacationplanner.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 public class ExcursionDetails extends AppCompatActivity {
 
@@ -29,6 +35,8 @@ public class ExcursionDetails extends AppCompatActivity {
     String date;
     int excursionID;
     int vacaID;
+    String vacaStart;
+    String vacaEnd;
     EditText editName;
     EditText editDate;
     Repository repository;
@@ -50,9 +58,10 @@ public class ExcursionDetails extends AppCompatActivity {
         date = getIntent().getStringExtra("date");
         excursionID = getIntent().getIntExtra("excursionid", -1);
         vacaID = getIntent().getIntExtra("vacationID", -1);
+        vacaStart = getIntent().getStringExtra("vacationStart");
+        vacaEnd = getIntent().getStringExtra("vacationEnd");
         editName.setText(name);
         editDate.setText(date);
-
         editDate.setOnClickListener(v -> showDate(editDate));
         repository = new Repository(getApplication());
 
@@ -65,6 +74,32 @@ public class ExcursionDetails extends AppCompatActivity {
     //save and delete excursions for both B5B and B3H task requirements
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.saveexcursion) {
+            //B5E add excursion date is during the associated vacation validation
+            String excursionDate = editDate.getText().toString();
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.US);
+
+            try {
+                Date excursionDateCheck = sdf.parse(excursionDate);
+                Log.d("ExcursionDetails", "vacaStart: " + vacaStart + ", vacaEnd: " + vacaEnd);
+                Date vacaStartCheck = sdf.parse(vacaStart);
+                Date vacaEndCheck = sdf.parse(vacaEnd);
+
+                if (excursionDateCheck.before(vacaStartCheck)) {
+                    Toast.makeText(this, "Excursion date cannot be before the vacation starts.", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+                if (excursionDateCheck.after(vacaEndCheck)) {
+                    Toast.makeText(this, "Excursion date cannot be after the vacation ends.", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+
+            }
+            catch (ParseException e){
+                Toast.makeText(this, "Invalid date format", Toast.LENGTH_LONG).show();
+                return true;
+            }
+
+
             Excursion excursion;
             if (excursionID == -1) {
                 if (repository.getmAllExcursions().size() == 0) excursionID = 1;
@@ -80,7 +115,7 @@ public class ExcursionDetails extends AppCompatActivity {
                 this.finish();
             }
         }
-            //TODO: delete excursion option
+            //delete excursion option
         if(item.getItemId() == R.id.deleteexcursion) {
             Excursion excursion;
             excursion = new Excursion(excursionID,editName.getText().toString(), editDate.getText().toString(), vacaID);
@@ -110,4 +145,8 @@ public class ExcursionDetails extends AppCompatActivity {
         }, year, month, day);
         datePickerDialog.show();
     }
+
+
+
+    //TODO: B5D add an alert that the user can set that will trigger on the excursion date, stating the excursion title
 }
