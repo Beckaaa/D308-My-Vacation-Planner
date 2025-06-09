@@ -219,12 +219,6 @@ public class VacationDetails extends AppCompatActivity {
         return endDate;
     }
 
-    //TODO: B3D add end date is after start date validation
-
-
-    //TODO: B3E add an alert that the user can set which will trigger on the start and end date, displaying the vacation title and whether it is starting or ending.
-
-
     @Override
     protected void onResume() {
         super.onResume();

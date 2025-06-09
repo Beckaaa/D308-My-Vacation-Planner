@@ -17,8 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.myvacationplanner.Database.Repository;
 import com.zybooks.myvacationplanner.Entities.Excursion;
@@ -26,12 +24,10 @@ import com.zybooks.myvacationplanner.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public class ExcursionDetails extends AppCompatActivity {
 
@@ -127,7 +123,7 @@ public class ExcursionDetails extends AppCompatActivity {
             repository.delete(excursion);
             this.finish();
         }
-        //TODO: B5D add an alert that the user can set that will trigger on the excursion date, stating the excursion title
+        //B5D add an alert that the user can set that will trigger on the excursion date, stating the excursion title
         if(item.getItemId() == R.id.notifyexcursion) {
             String dateOfExcursion = editDate.getText().toString();
             SimpleDateFormat sdf= new SimpleDateFormat("MM/dd/yy", Locale.US);

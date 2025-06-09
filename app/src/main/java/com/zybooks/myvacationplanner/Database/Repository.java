@@ -1,9 +1,7 @@
 package com.zybooks.myvacationplanner.Database;
 
-import android.adservices.ondevicepersonalization.OnDevicePersonalizationManager;
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
 
 import com.zybooks.myvacationplanner.DAO.ExcursionDAO;
 import com.zybooks.myvacationplanner.DAO.VacationDAO;

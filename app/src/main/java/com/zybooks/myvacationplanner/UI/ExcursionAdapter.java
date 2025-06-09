@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zybooks.myvacationplanner.Entities.Excursion;
-import com.zybooks.myvacationplanner.Entities.Vacation;
 import com.zybooks.myvacationplanner.R;
 
 import java.util.List;
