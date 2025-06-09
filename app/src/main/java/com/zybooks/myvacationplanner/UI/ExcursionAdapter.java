@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,17 +23,19 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
 
     class ExcursionViewHolder extends RecyclerView.ViewHolder {
         private final TextView excursionItemView;
+        private final TextView excursionItemView2;
         private ExcursionViewHolder (View itemView) {
             super(itemView);
             excursionItemView = itemView.findViewById(R.id.textViewExcursionListItem);
+            excursionItemView2 = itemView.findViewById(R.id.textViewExcursionDateItem);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     final Excursion current = mExcursions.get(position);
                     Intent intent = new Intent(context, ExcursionDetails.class);
-                    intent.putExtra("id", current.getExcursionID());
-                    intent.putExtra("title", current.getExcursionTitle());
+                    intent.putExtra("excursionid", current.getExcursionID());
+                    intent.putExtra("name", current.getExcursionTitle());
                     intent.putExtra("date", current.getExcursionDate());
                     context.startActivity(intent);
                 }
@@ -52,7 +55,9 @@ public class ExcursionAdapter extends RecyclerView.Adapter<ExcursionAdapter.Excu
         if (mExcursions != null){
             Excursion current = mExcursions.get(position);
             String name = current.getExcursionTitle();
+            String date = current.getExcursionDate();
             holder.excursionItemView.setText(name);
+            holder.excursionItemView2.setText(date);
 
         }
         else{

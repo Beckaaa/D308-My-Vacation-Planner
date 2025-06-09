@@ -1,5 +1,6 @@
 package com.zybooks.myvacationplanner.UI;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.zybooks.myvacationplanner.Entities.Excursion;
 import com.zybooks.myvacationplanner.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ExcursionDetails extends AppCompatActivity {
@@ -31,6 +33,7 @@ public class ExcursionDetails extends AppCompatActivity {
     EditText editDate;
     Repository repository;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +44,16 @@ public class ExcursionDetails extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         editName = findViewById(R.id.excursionnametext);
         editDate = findViewById(R.id.editTextDateExcursions);
         name = getIntent().getStringExtra("name");
         date = getIntent().getStringExtra("date");
-        excursionID = getIntent().getIntExtra("id", -1);
-        vacaID = getIntent().getIntExtra("vacaID", 1);
+        excursionID = getIntent().getIntExtra("excursionid", -1);
+        vacaID = getIntent().getIntExtra("vacationID", -1);
         editName.setText(name);
         editDate.setText(date);
 
+        editDate.setOnClickListener(v -> showDate(editDate));
         repository = new Repository(getApplication());
 
     }
@@ -87,5 +90,24 @@ public class ExcursionDetails extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    //added calendar and format validation
+    private void showDate(EditText targetedEditText) {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay)-> {
+            String formattedDate = String.format("%02d/%02d/%02d", selectedMonth +1, selectedDay, selectedYear % 100);
+            targetedEditText.setText(formattedDate);
+            targetedEditText.setError(null);
+            //formattedDate validation
+            if (!formattedDate.matches(("\\d{2}/\\d{2}/\\d{2}"))){
+                targetedEditText.setError("Invalid date format");
+            }
+
+        }, year, month, day);
+        datePickerDialog.show();
     }
 }

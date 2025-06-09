@@ -77,6 +77,7 @@ public class VacationDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VacationDetails.this, ExcursionDetails.class);
+                intent.putExtra("vacationID", vacationID);
                 startActivity(intent);
             }
         });
@@ -147,7 +148,7 @@ public class VacationDetails extends AppCompatActivity {
             String formattedDate = String.format("%02d/%02d/%02d", selectedMonth +1, selectedDay, selectedYear % 100);
             targetedEditText.setText(formattedDate);
             //formattedDate validation
-            if (!formattedDate.matches(("\\d{2}/\\d{2}/\\d{2}/"))){
+            if (!formattedDate.matches(("\\d{2}/\\d{2}/\\d{2}"))){
                 targetedEditText.setError("Invalid date format");
             }
 
@@ -158,11 +159,11 @@ public class VacationDetails extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        List<Excursion> allExcursions = repository.getmAllExcursions();
+        List<Excursion> associatedExcursions = repository.getmAssociatedExcursions(vacationID);
         RecyclerView recyclerView = findViewById(R.id.vacationdetailsrecyclerview);
         final ExcursionAdapter excursionAdapter = new ExcursionAdapter(this);
         recyclerView.setAdapter(excursionAdapter);
-       excursionAdapter.setExcursions(allExcursions);
+       excursionAdapter.setExcursions(associatedExcursions);
     }
 }
 
