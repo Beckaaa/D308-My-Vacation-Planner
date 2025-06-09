@@ -38,6 +38,8 @@ public class VacationDetails extends AppCompatActivity {
     String place;
     String startDate;
     String endDate;
+
+    String vacationSharingDetails;
     int vacationID;
     EditText editName;
     EditText editPlace;
@@ -164,8 +166,22 @@ public class VacationDetails extends AppCompatActivity {
              }
             this.finish();
         }
-        //TODO: add sharing menu list item and send information to the application using sendIntent.putExtra(Intent.EXTRA_TEXT, "value");
-        //TODO: B3F add sharing features so the user can share all the vacation details via a sharing feature (either e-mail, clipboard or SMS) that automatically populates with the vacation details
+        //B3F add sharing features so the user can share all the vacation details via a sharing feature (either e-mail, clipboard or SMS) that automatically populates with the vacation details
+        if(item.getItemId() == R.id.sharevacation) {
+            vacationSharingDetails = "Vacation Name: " + editName.getText().toString() +
+                                     "\nWhere to Stay: " + editPlace.getText().toString() +
+                                     "\nWhen it Starts: " + editStartDate.getText().toString() +
+                                     " \nWhen it Ends: " + editEndDate.getText().toString();
+            Intent sentIntent = new Intent();
+            sentIntent.setAction(Intent.ACTION_SEND);
+            sentIntent.putExtra(Intent.EXTRA_TITLE, editName.getText().toString() + " Vacation Details");
+            sentIntent.putExtra(Intent.EXTRA_TEXT, vacationSharingDetails);
+            sentIntent.setType("text/plain");
+            Intent shareIntent = Intent.createChooser(sentIntent, null);
+            startActivity(shareIntent);
+
+        }
+
         return true;
     }
 

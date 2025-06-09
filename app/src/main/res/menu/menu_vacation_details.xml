@@ -4,4 +4,6 @@
         android:id = "@+id/savevacation"></item>
     <item android:title="Delete Vacation"
         android:id = "@+id/deletevacation"></item>
+    <item android:title= "Share Vacation"
+        android:id="@+id/sharevacation"></item>
 </menu>
