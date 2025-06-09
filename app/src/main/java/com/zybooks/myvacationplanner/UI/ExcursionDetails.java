@@ -142,6 +142,11 @@ public class ExcursionDetails extends AppCompatActivity {
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
         }
+        //navigation fixing
+        if(item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
 
         return true;
     }

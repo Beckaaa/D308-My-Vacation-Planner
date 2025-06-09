@@ -222,6 +222,12 @@ public class VacationDetails extends AppCompatActivity {
             }
         }
 
+        //navigation fixing
+        if(item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+
         return true;
     }
 
