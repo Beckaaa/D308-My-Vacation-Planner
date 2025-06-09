@@ -136,8 +136,8 @@ public class ExcursionDetails extends AppCompatActivity {
             }
             Long trigger = myNotifyExcursionDate.getTime();
             Intent intent = new Intent(ExcursionDetails.this, MyReceiver.class);
-            String excursionNotificationMessage = editName.getText().toString() + " is scheduled for today!";
-            intent.putExtra("excursionNotification", excursionNotificationMessage);
+            String excursionNotificationMessage = "Your excursion: " + editName.getText().toString() + " is scheduled for today!";
+            intent.putExtra("notification", excursionNotificationMessage);
             PendingIntent sender = PendingIntent.getBroadcast(ExcursionDetails.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_ONE_SHOT);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);

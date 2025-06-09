@@ -1,6 +1,9 @@
 package com.zybooks.myvacationplanner.UI;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +12,6 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -180,6 +182,44 @@ public class VacationDetails extends AppCompatActivity {
             Intent shareIntent = Intent.createChooser(sentIntent, null);
             startActivity(shareIntent);
 
+        }
+        //B3E add alert that user can set which will trigger on the start and end date and displays whether the vacation is starting or ending
+        if(item.getItemId() == R.id.notifyvacation) {
+            String dateOfVacationStart = editStartDate.getText().toString();
+            String dateOfVacationEnd = editEndDate.getText().toString();
+            SimpleDateFormat sdf= new SimpleDateFormat("MM/dd/yy", Locale.US);
+            Date myNotifyVacationStartDate = null;
+            Date myNotifyVacationEndDate = null;
+            try {
+                myNotifyVacationStartDate = sdf.parse(dateOfVacationStart);
+                myNotifyVacationEndDate = sdf.parse(dateOfVacationEnd);
+
+            }
+            catch (ParseException e){
+                e.printStackTrace();
+            }
+            //vacation start notify
+            if (myNotifyVacationStartDate != null) {
+                Long startTrigger = myNotifyVacationStartDate.getTime();
+
+                Intent intent = new Intent(VacationDetails.this, MyReceiver.class);
+                String vacationNotificationStartMessage = "Your vacation: " + editName.getText().toString() + " is scheduled to start today!";
+                intent.putExtra("notification", vacationNotificationStartMessage);
+                PendingIntent startSender = PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_ONE_SHOT);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, startTrigger, startSender);
+            }
+            //vacation end notify
+            if (myNotifyVacationEndDate != null) {
+                Long startTrigger = myNotifyVacationEndDate.getTime();
+
+                Intent intent = new Intent(VacationDetails.this, MyReceiver.class);
+                String vacationNotificationEndMessage = "Your vacation: " + editName.getText().toString() + " ends today!";
+                intent.putExtra("notification", vacationNotificationEndMessage);
+                PendingIntent endSender = PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_ONE_SHOT);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, startTrigger, endSender);
+            }
         }
 
         return true;

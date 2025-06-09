@@ -6,4 +6,6 @@
         android:id = "@+id/deletevacation"></item>
     <item android:title= "Share Vacation"
         android:id="@+id/sharevacation"></item>
+    <item android:title= "Notify Start/End Vacation"
+        android:id="@+id/notifyvacation"></item>
 </menu>

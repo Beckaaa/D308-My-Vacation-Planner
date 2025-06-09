@@ -19,12 +19,12 @@ public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         // calls when BroadcastReceiver is receiving an Intent broadcast.
-        Toast.makeText(context, intent.getStringExtra("excursionNotification"), Toast.LENGTH_LONG).show();
+        Toast.makeText(context, intent.getStringExtra("notification"), Toast.LENGTH_LONG).show();
         createNotificationChannel(context, channel_id);
         Notification n = new NotificationCompat.Builder(context, channel_id)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentText(intent.getStringExtra("excursionNotification"))
-                .setContentTitle("Excursion:").build();
+                .setContentText(intent.getStringExtra("notification"))
+                .setContentTitle("Vacation Plans").build();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(notificationID++, n);
 
