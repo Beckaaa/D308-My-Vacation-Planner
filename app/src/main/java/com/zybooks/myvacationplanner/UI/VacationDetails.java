@@ -24,9 +24,13 @@ import com.zybooks.myvacationplanner.Entities.Excursion;
 import com.zybooks.myvacationplanner.Entities.Vacation;
 import com.zybooks.myvacationplanner.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class VacationDetails extends AppCompatActivity {
 
@@ -105,6 +109,25 @@ public class VacationDetails extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // save and update vacations
         if(item.getItemId() == R.id.savevacation) {
+            //B3D add end date is after start date validation
+            String start = editStartDate.getText().toString();
+            String end = editEndDate.getText().toString();
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy", Locale.US);
+
+            try {
+                Date startDateCheck;
+                Date endDateCheck;
+                startDateCheck = sdf.parse(start);
+                endDateCheck = sdf.parse(end);
+                if (startDateCheck != null && endDateCheck != null && endDateCheck.before(startDateCheck)) {
+                    Toast.makeText(this, "End date must be after start date", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+            }
+            catch (ParseException e){
+                Toast.makeText(this, "Invalid date format", Toast.LENGTH_LONG).show();
+                return true;
+            }
             Vacation vacation;
             if(vacationID == -1) {
                 if(repository.getmAllVacations().size() ==0) vacationID = 1;
@@ -118,6 +141,7 @@ public class VacationDetails extends AppCompatActivity {
                 repository.update(vacation);
                 this.finish();
             }
+        return true;
         }
 // committed separate for validation as b1.b
         //b3b delete
@@ -135,6 +159,7 @@ public class VacationDetails extends AppCompatActivity {
             this.finish();
         }
         //TODO: add sharing menu list item and send information to the application using sendIntent.putExtra(Intent.EXTRA_TEXT, "value");
+        //TODO: B3F add sharing features so the user can share all the vacation details via a sharing feature (either e-mail, clipboard or SMS) that automatically populates with the vacation details
         return true;
     }
 
@@ -155,6 +180,12 @@ public class VacationDetails extends AppCompatActivity {
                 }, year, month, day);
         datePickerDialog.show();
     }
+
+    //TODO: B3D add end date is after start date validation
+
+
+    //TODO: B3E add an alert that the user can set which will trigger on the start and end date, displaying the vacation title and whether it is starting or ending.
+
 
     @Override
     protected void onResume() {
