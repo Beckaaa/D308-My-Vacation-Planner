@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.zybooks.myvacationplanner.R;
 
 public class MainActivity extends AppCompatActivity {
+    public static int numAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

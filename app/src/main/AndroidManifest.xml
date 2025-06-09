@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,25 +13,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyVacationPlanner"
         tools:targetApi="31">
+        <receiver
+            android:name=".UI.MyReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
         <activity
             android:name=".UI.ExcursionDetails"
             android:exported="false"
             android:label="Excursion Details"
-            android:parentActivityName="com.zybooks.myvacationplanner.UI.ExcursionDetails"/>
+            android:parentActivityName=".UI.ExcursionDetails" />
         <activity
-            android:name="com.zybooks.myvacationplanner.UI.VacationDetails"
+            android:name=".UI.VacationDetails"
             android:exported="false"
             android:label="Vacation Details"
-            android:parentActivityName=".UI.VacationList"/>
+            android:parentActivityName=".UI.VacationList" />
         <activity
             android:name=".UI.VacationList"
             android:exported="false"
             android:label="Vacation List"
-            android:parentActivityName=".UI.MainActivity"/>
+            android:parentActivityName=".UI.MainActivity" />
         <activity
             android:name=".UI.MainActivity"
             android:exported="true"
-            android:label = "Vacations and Excursions">
+            android:label="Vacations and Excursions">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

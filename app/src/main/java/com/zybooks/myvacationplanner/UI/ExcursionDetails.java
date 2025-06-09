@@ -1,6 +1,10 @@
 package com.zybooks.myvacationplanner.UI;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -123,6 +127,25 @@ public class ExcursionDetails extends AppCompatActivity {
             repository.delete(excursion);
             this.finish();
         }
+        //TODO: B5D add an alert that the user can set that will trigger on the excursion date, stating the excursion title
+        if(item.getItemId() == R.id.notifyexcursion) {
+            String dateOfExcursion = editDate.getText().toString();
+            SimpleDateFormat sdf= new SimpleDateFormat("MM/dd/yy", Locale.US);
+            Date myNotifyExcursionDate = null;
+            try {
+                myNotifyExcursionDate = sdf.parse(dateOfExcursion);
+            }
+            catch (ParseException e){
+                e.printStackTrace();
+            }
+            Long trigger = myNotifyExcursionDate.getTime();
+            Intent intent = new Intent(ExcursionDetails.this, MyReceiver.class);
+            String excursionNotificationMessage = editName.getText().toString() + " is scheduled for today!";
+            intent.putExtra("excursionNotification", excursionNotificationMessage);
+            PendingIntent sender = PendingIntent.getBroadcast(ExcursionDetails.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_ONE_SHOT);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+        }
 
         return true;
     }
@@ -148,5 +171,5 @@ public class ExcursionDetails extends AppCompatActivity {
 
 
 
-    //TODO: B5D add an alert that the user can set that will trigger on the excursion date, stating the excursion title
+
 }
