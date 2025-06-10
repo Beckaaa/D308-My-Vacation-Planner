@@ -1,28 +1,94 @@
-<strong> **DO NOT DISTRIBUTE OR PUBLICLY POST SOLUTIONS TO THESE LABS. MAKE ALL FORKS OF THIS REPOSITORY WITH SOLUTION CODE PRIVATE. PLEASE REFER TO THE STUDENT CODE OF CONDUCT AND ETHICAL EXPECTATIONS FOR COLLEGE OF INFORMATION TECHNOLOGY STUDENTS FOR SPECIFICS. ** </strong>
+# VACATION PLANNER 
 
-# WESTERN GOVERNORS UNIVERSITY 
-## D308 – MOBILE APPLICATION DEVELOPMENT (ANDROID)
-Welcome to Mobile Application Development (Android)! This is an opportunity for students to create page layouts with clean navigation, design mobile application infrastructure and user interfaces, develop secure database-backed mobile applications in an object-oriented language, document solutions for application requirements with storyboards and emulators, articulate challenges in the development process, and describe alternatives methods in overcoming mobile application development problems. 
+## PURPOSE:
+The purpose of this mobile application is to keep track of your vacations and excursions in a single location. The application allows you to save a list of vacations and optionally add excursions to each vacation.
+Additionally, you can set up notifications for the start and end dates of a vacation as well as the date of an excursion. You also have the ability to share the details of a vacation via sms, email, or just copy the details to a clipboard for later use.
 
-FOR SPECIFIC TASK INSTRUCTIONS AND REQUIREMENTS FOR THIS ASSESSMENT, PLEASE REFER TO THE COURSE PAGE.
-## BASIC INSTRUCTIONS
-For this assessment, you have an opportunity to test your competency as a mobile application developer. Your understanding of mobile application structure and design will help you to develop applications to meet customer requirements. This task will allow you to demonstrate your ability to apply the skills learned in the course.
+## OPERATION INSTRUCTIONS:
+To begin, enter the app by clicking on the "Ready to Explore?" button. This will display the "Vacation List" screen.
 
-## SUPPLEMENTAL RESOURCES 
-1.	How to clone a project to Android Studio using Git?
+# Instructions for Managing Vacations
+```
+**Add a Vacation**
+    1. Click on the "+" icon at the bottom right corner of the screen to add a new vacation to the list. 
+    2. Click on the line next to "Vacation Title" where it says "title of vacation" and type in the name for your vacation.
+    3. Click on the line next to "Where to Stay" where it says "name of the place to stay" and type in where you plan to stay during the vacation.
+    4. Click on the line next to "Start Date" where it says "MM/DD/YY" and select the start date of your vacation on the calendar that pops up.
+    5. Click on the line next to "End Date" where it says "MM/DD/YY" and select the end date of your vacation on the calendar that pops up.
+    6. Click on the menu (three dots vertically stacked) at the top right corner and select "Save Vacation". 
+    
+    After saving, the application will return to the Vacation List screen where your newly saved vacation will be added to the list. Any additional vacations will be added to the bottom of the list. 
+    
+    _Note: You will see an error message appear after selecting "Save Vacation" if your end date is before your start date, or if the end or start date was not selected._
+    
+**Update Vacation Details**
+    1. On the Vacation List screen, click on the name of the vacation you wish to make changes to. 
+    2. Make any corrections or changes to the title, place to stay, start or end date as necessary.
+    3. Click on the menu (three dots vertically stacked) at the top right corner and select "Save Vacation".
+    
+    After saving, the application will return to the Vacation List screen where your newly updated vacation will appear in the same position on the list.
+    _Note: you will see an error message appear after selecting "Save Vacation" if your end date is before your start date._
+    
+**Delete Vacation**
+    1. On the Vacation List screen, click on the name of the vacation you wish to delete.
+    2. Click on the menu (three dots vertically stacked) at the top right corner and select "Delete Vacation".
+    
+    A message will appear showing that the vacation was successfully deleted before the application returns to the "Vacation List" screen. 
+    _Note: you will see an error message appear after selecting "Delete Vacation" if there are any excursions that were added to this vacation._ 
+    
+**Share Vacation**
+    1. On the Vacation List screen, click on the name of the vacation you wish to share. 
+    2. Click on the menu (three dots vertically stacked) at the top right corner and select "Share Vacation".
+    3. Select how you want to share the vacation details from the options that will appear on the screen. 
+    
+    _Note: The options for sharing typically include SMS, email, copying details to the clipboard, etc._ 
+    
+**Set up Notification for Vacation Start and End Date**
+    1. On the Vacation List screen, click on the name of the vacation you wish to receive notifications for the vacation's start and end date. 
+    2. Click on the menu (three dots vertically stacked) at the top right corner and select "Notify Start/End Vacation".
+    
+    Messages will appear showing that the start date and end dates notifications for this vacation were successfully set up.
+```  
 
-> Ensure that Android Studio and Git are installed on your system.  New Project, Get from VCS button or the File/New/Project from Version Control. This will open a window  with a prompt to clone the project. Save it in a safe location for the directory and press clone. IntelliJ will prompt you for your credentials. Enter in your WGU Credentials and the project will be cloned onto your local machine.
+# Instructions for Managing Excursions
+```
+**Add an Excursion**
+    1. On the Vacation List screen, click on the name of the vacation that you wish to add an excursion to.
+    2. Click on the "+" icon at the bottom right corner of the Vacation Details screen to add a new excursion to this vacation. 
+    3. Click on the line next to "Excursion Name" where it says "name of the excursion" and type in the name for your excursion.
+    4. Click on the line next to "Date" where it says "MM/DD/YY" and select the date of your excursion on the calendar that pops up.
+    5. Click on the menu (three dots vertically stacked) at the top right corner and select "Save Excursion". 
+    
+    After saving, the application will return to the "Vacation Details" screen where your newly saved excursion will be added to the list below the vacation details. 
+    Any additional excursions for this vacation will be added to the bottom of this list. 
+    
+    _Note: You will see an error message appear after selecting "Save Excursion" if a date was not selected._
+    
+**Update Excursion Details**
+    1. On the Vacation Details screen, click on the name of the excursion you wish to make changes to. 
+    2. Make any corrections or changes to the name or date as necessary.
+    3. Click on the menu (three dots vertically stacked) at the top right corner and select "Save Excursion".
+    
+    After saving, the application will return to the Vacation Details screen where your newly updated excursion will appear in the same position on the list. 
+    
+**Delete Excursion**
+    1. On the Vacation List screen, click on the name of the vacation that you wish to delete an excursion from.
+    2. On the Vacation Details screen, click on the name of the excursion you wish to delete.
+    3. Click on the menu (three dots vertically stacked) at the top right corner and select "Delete Excursion".
+    
+    A message will appear showing that the excursion was successfully deleted before the application returns to the Vacation Details screen. 
+    
+**Set up Notification for Excursion Date**
+    1. On the Vacation List screen, click on the name of the vacation to get to the Vacation Details screen to see the associated excursions.
+    2. On the Vacation Details screen, click on the name of the excursion you want to receive a notification for.
+    3. Click on the menu (three dots vertically stacked) at the top right corner and select "Notify on Excursion Date".
+    
+    A message will appear showing that the notification for this excursion was successfully set up.
+```
 
-2. How to create a branch and start Development?
+## SIGNED APK DEPLOYMENT:
+> Android Version 16 
+> API 36
 
-- GitLab method
-> Press the '+' button located near your branch name. In the dropdown list, press the 'New branch' button. This will allow you to create a name for your branch. Once the branch has been named, you can select 'Create Branch' to push the branch to your repository.
-
-- Android Studio method
-> In Android Studio, Go to the 'Git' button on the top toolbar. Select the new branch option and create a name for the branch. Make sure checkout branch is selected and press create. You can now add a commit message and push the new branch to the local repo.
-
-## SUPPORT
-If you need additional support, please navigate to the course page and reach out to your course instructor.
-## FUTURE USE
-Take this opportunity to create or add to a simple resume portfolio to highlight and showcase your work for future use in career search, experience, and education!
-
+## GIT REPOSITORY LINK:
+> https://gitlab.com/wgu-gitlab-environment/student-repos/rweb198/d308-mobile-application-development-android.git
