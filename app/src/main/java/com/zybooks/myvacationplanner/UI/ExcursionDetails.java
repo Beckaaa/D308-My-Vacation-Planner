@@ -141,6 +141,8 @@ public class ExcursionDetails extends AppCompatActivity {
             PendingIntent sender = PendingIntent.getBroadcast(ExcursionDetails.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_ONE_SHOT);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+
+            Toast.makeText(ExcursionDetails.this,"Notification has been set!", Toast.LENGTH_SHORT).show();
         }
         //navigation fixing
         if(item.getItemId() == android.R.id.home) {

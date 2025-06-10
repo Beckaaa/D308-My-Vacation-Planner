@@ -208,6 +208,7 @@ public class VacationDetails extends AppCompatActivity {
                 PendingIntent startSender = PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_ONE_SHOT);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, startTrigger, startSender);
+                Toast.makeText(VacationDetails.this,"Start date notification is set!", Toast.LENGTH_SHORT).show();
             }
             //vacation end notify
             if (myNotifyVacationEndDate != null) {
@@ -219,7 +220,9 @@ public class VacationDetails extends AppCompatActivity {
                 PendingIntent endSender = PendingIntent.getBroadcast(VacationDetails.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE|PendingIntent.FLAG_ONE_SHOT);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, startTrigger, endSender);
+                Toast.makeText(VacationDetails.this, "End date notification is set!", Toast.LENGTH_SHORT).show();
             }
+
         }
 
         //navigation fixing
